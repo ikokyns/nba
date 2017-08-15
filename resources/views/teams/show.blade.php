@@ -19,6 +19,31 @@
 			</ul>
 		@endforeach
 
+	    @foreach($team->comments as $comment)
+	        <li>
+	            <strong>{{ $comment->created_at->diffForHumans() }}</strong>
+	            {{ $comment->content }} By {{ $comment->user->name }}
+	        </li>
+	    @endforeach
+	    
+		<hr>
+
+		    <h4>Comments</h4>
+
+		    <form method="POST" action="/teams/{{ $team->id }}/comment">
+
+		        {{ csrf_field() }}
+
+		        <div class="form-group">
+		            <label for="body">Content</label>
+		            <textarea class="form-control" id="body" name="content"></textarea>
+		        </div>
+
+		        <div class="form-group">
+		            <button type="submit" class="btn btn-primary">Submit</button>
+		        </div>
+
+		    </form>
     </div>
 </div>
 
